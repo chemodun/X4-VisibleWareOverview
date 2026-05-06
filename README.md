@@ -4,7 +4,6 @@ Adds a **Wares on Visible Stations** tab to the **Object List** panel in the map
 
 ## Features
 
-- **Wares on Visible Stations tab**: A dedicated tab in the Object List panel lists all wares that are stocked, produced, or consumed at stations currently visible on the map.
 - **Player and NPC stations**: Both player-owned and NPC stations are included. Player stations always show the full ware breakdown; NPC stations show ware details when the Logical Station Overview visibility rules allow it.
 - **Grouped by transport type**: Wares are organised under section headers: Container Storage, Solid Storage, Liquid Storage, and Condensate Storage.
 - **Per-ware summary row**: Each ware shows a ware icon with name, total production per hour (green), total consumption per hour (red), total stock across all visible stations, and the number of stations that handle it.
@@ -82,7 +81,6 @@ The **+/-** button in the column header row expands or collapses all ware rows s
 ## Credits
 
 - **Author**: Chem O`Dun, on [Nexus Mods](https://next.nexusmods.com/profile/ChemODun/mods?gameId=2659) and [Steam Workshop](https://steamcommunity.com/id/chemodun/myworkshopfiles/?appid=392160)
-- Based on the ware data logic from the [Ware Overview Tab](https://www.nexusmods.com/x4foundations/mods/2079) mod by the same author.
 - *"X4: Foundations"* is a trademark of [Egosoft](https://www.egosoft.com).
 
 ## Acknowledgements
