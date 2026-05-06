@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<content
+  id="ws_visibleWareOverview"
+  name="Visible Ware Overview"
+  author="Chem O`Dun"
+  version="80001"
+  date="2026-05-05"
+  save="false"
+  sync="false"
+  enabled="1"
+  description="Adds a Wares on Visible Stations tab to the Object List panel in the map. Lists wares at stations currently rendered in the map view (player-owned and NPC), grouped by transport type. NPC stations are included only when their ware data is visible to the player via Logical Station Overview visibility rules.">
+  <text language="7"
+    description="Adds a Wares on Visible Stations tab to the Object List panel in the map. Lists wares at stations currently rendered in the map view (player-owned and NPC), grouped by transport type. NPC stations are included only when their ware data is visible to the player via Logical Station Overview visibility rules."></text>
+  <!-- French -->
+  <text language="33"
+    description="Ajoute un onglet Marchandises sur les stations visibles au panneau Liste des objets dans la carte. Répertorie les marchandises dans les stations actuellement affichées dans la vue de la carte (propriété du joueur et PNJ), regroupées par type de transport. Les stations PNJ sont incluses uniquement lorsque leurs données de marchandises sont visibles pour le joueur via les règles de visibilité de la Vue d'ensemble de la station logique."></text>
+  <!-- Spanish -->
+  <text language="34"
+    description="Añade una pestaña Mercancías en estaciones visibles al panel de Lista de Objetos en el mapa. Enumera las mercancías en las estaciones actualmente mostradas en la vista del mapa (del jugador y PNJ), agrupadas por tipo de transporte. Las estaciones PNJ se incluyen solo cuando sus datos de mercancías son visibles para el jugador mediante las reglas de visibilidad de la Vista General de Estación Lógica."></text>
+  <!-- Italian -->
+  <text language="39"
+    description="Aggiunge una scheda Merci nelle stazioni visibili al pannello Elenco Oggetti nella mappa. Elenca le merci nelle stazioni attualmente visualizzate nella mappa (del giocatore e NPC), raggruppate per tipo di trasporto. Le stazioni NPC sono incluse solo quando i loro dati sulle merci sono visibili al giocatore tramite le regole di visibilità della Panoramica Stazione Logica."></text>
+  <!-- Czech -->
+  <text language="42"
+    description="Přidá záložku Zboží na viditelných stanicích do panelu Seznam objektů na mapě. Zobrazuje zboží ve stanicích aktuálně zobrazených v mapě (hráčských i NPC), seskupených podle typu přepravy. Stanice NPC jsou zahrnuty pouze tehdy, když jsou jejich data o zboží viditelná hráči prostřednictvím pravidel viditelnosti Přehledu logistické stanice."></text>
+  <!-- English -->
+  <text language="44"
+    description="Adds a Wares on Visible Stations tab to the Object List panel in the map. Lists wares at stations currently rendered in the map view (player-owned and NPC), grouped by transport type. NPC stations are included only when their ware data is visible to the player via Logical Station Overview visibility rules."></text>
+  <!-- Polish -->
+  <text language="48"
+    description="Dodaje zakładkę Towary na widocznych stacjach do panelu Listy Obiektów na mapie. Wyświetla towary w stacjach aktualnie renderowanych w widoku mapy (gracza i NPC), pogrupowane według typu transportu. Stacje NPC są uwzględniane tylko wtedy, gdy ich dane towarowe są widoczne dla gracza zgodnie z zasadami widoczności Przeglądu Stacji Logistycznej."></text>
+  <!-- German -->
+  <text language="49"
+    description="Fügt eine Registerkarte Waren auf sichtbaren Stationen zum Objektlisten-Panel auf der Karte hinzu. Listet Waren in Stationen auf, die derzeit in der Kartenansicht dargestellt werden (Spieler und NPC), nach Transporttyp gruppiert. NPC-Stationen werden nur einbezogen, wenn ihre Warendaten für den Spieler gemäß den Sichtbarkeitsregeln der Logistischen Stationsübersicht sichtbar sind."></text>
+  <!-- Portuguese -->
+  <text language="55"
+    description="Adiciona uma aba Mercadorias nas Estações Visíveis ao painel de Lista de Objetos no mapa. Lista as mercadorias nas estações atualmente renderizadas na vista do mapa (do jogador e NPC), agrupadas por tipo de transporte. As estações NPC são incluídas apenas quando seus dados de mercadorias são visíveis para o jogador pelas regras de visibilidade da Visão Geral da Estação Lógica."></text>
+  <!-- Japanese -->
+  <text language="81"
+    description="マップのオブジェクトリストパネルに「表示中の駅の物資」タブを追加します。マップビューに現在表示されている駅（プレイヤー所有およびNPC）の物資を輸送タイプ別にグループ化して一覧表示します。NPC駅は、論理ステーション概要の可視性ルールによりプレイヤーが物資データを閲覧できる場合にのみ含まれます。"></text>
+  <!-- Korean -->
+  <text language="82"
+    description="맵의 오브젝트 목록 패널에 '보이는 기지의 물자' 탭을 추가합니다. 현재 맵 보기에 표시된 기지(플레이어 소유 및 NPC)의 물자를 운송 유형별로 그룹화하여 나열합니다. NPC 기지는 논리 기지 개요 가시성 규칙을 통해 플레이어에게 물자 데이터가 표시될 때만 포함됩니다."></text>
+  <!-- Chinese Simplified -->
+  <text language="86"
+    description="在地图的对象列表面板中添加一个「可见站点的货物」选项卡。按运输类型分组列出当前在地图视图中显示的站点（玩家拥有和NPC）的货物。仅当通过逻辑站概览可见性规则玩家可见其货物数据时，才包含NPC站点。"></text>
+  <!-- Chinese Traditional -->
+  <text language="88"
+    description="在地圖的物件清單面板中新增一個「可見站點的貨物」標籤。按運輸類型分組列出當前在地圖視圖中顯示的站點（玩家擁有和NPC）的貨物。僅當通過邏輯站概覽可見性規則玩家可見其貨物資料時，才包含NPC站點。"></text>
+  <!-- Turkish -->
+  <text language="90"
+    description="Haritadaki Nesne Listesi paneline Görünür İstasyonlardaki Mallar sekmesi ekler. Harita görünümünde şu anda görüntülenen istasyonlardaki (oyuncu ve NPC) malları taşıma türüne göre gruplandırarak listeler. NPC istasyonları yalnızca Mantıksal İstasyon Genel Görünümü görünürlük kuralları aracılığıyla oyuncuya mal verileri görünür olduğunda dahil edilir."></text>
+  <!-- Ukrainian -->
+  <text language="380"
+    description="Додає вкладку «Товари на видимих станціях» до панелі списку об'єктів на карті. Перелічує товари на станціях, що відображаються у поточному виді карти (гравця та NPC), згрупованих за типом транспорту. Станції NPC включаються лише тоді, коли їхні дані про товари видимі гравцю відповідно до правил видимості Огляду логістичної станції."></text>
+  <dependency version="800"></dependency>
+  <dependency id="kuerteeUIExtensionsAndHUD" optional="false" name="kuertee UI Extensions and HUD" version="804"></dependency>
+  <dependency id="ws_2042901274" optional="false" name="SirNukes Mod Support APIs" version="195"></dependency>
+  <dependency id="ws_3715253556" optional="false" name="Options Helper" version="100"></dependency>
+</content>

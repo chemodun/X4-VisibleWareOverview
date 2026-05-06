@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Chinese Simplified -->
+<diff>
+  <add sel="/language">
+    <page id="1972092423" title="Visible Ware Overview" descr="" voice="no">
+      <!-- mod identity -->
+      <t id="1">可见站点的货物</t>
+      <t id="2">按运输类型分组列出当前在地图视图中显示的站点的货物。仅当通过逻辑站概览可见性规则玩家可见其货物数据时，才包含NPC站点。</t>
+
+      <!-- status messages -->
+      <t id="1000">在此地图视图中未找到站点的货物数据</t>
+
+      <!-- settings: general section -->
+      <t id="20000">性能</t>
+
+      <!-- settings: data refresh interval -->
+      <t id="20010">数据刷新间隔</t>
+
+      <!-- settings: debug section -->
+      <t id="90000">调试</t>
+      <t id="90010">调试级别</t>
+      <t id="90012">调试</t>
+      <t id="90013">跟踪</t>
+    </page>
+  </add>
+</diff>

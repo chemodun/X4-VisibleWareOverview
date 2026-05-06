@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Czech -->
+<diff>
+  <add sel="/language">
+    <page id="1972092423" title="Visible Ware Overview" descr="" voice="no">
+      <!-- mod identity -->
+      <t id="1">Zboží na viditelných stanicích</t>
+      <t id="2">Zobrazuje zboží ve stanicích aktuálně zobrazených v mapě, seskupených podle typu přepravy. Stanice NPC jsou zahrnuty pouze tehdy, když jsou jejich data o zboží viditelná prostřednictvím pravidel viditelnosti Přehledu logistické stanice.</t>
+
+      <!-- status messages -->
+      <t id="1000">Pro stanice v tomto pohledu mapy nebyla nalezena žádná data o zboží</t>
+
+      <!-- settings: general section -->
+      <t id="20000">Výkon</t>
+
+      <!-- settings: data refresh interval -->
+      <t id="20010">Interval obnovy dat</t>
+
+      <!-- settings: debug section -->
+      <t id="90000">Ladění</t>
+      <t id="90010">Úroveň ladění</t>
+      <t id="90012">Ladění</t>
+      <t id="90013">Trasování</t>
+    </page>
+  </add>
+</diff>

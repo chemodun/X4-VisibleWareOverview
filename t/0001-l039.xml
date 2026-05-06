@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Italian -->
+<diff>
+  <add sel="/language">
+    <page id="1972092423" title="Visible Ware Overview" descr="" voice="no">
+      <!-- mod identity -->
+      <t id="1">Merci nelle stazioni visibili</t>
+      <t id="2">Elenca le merci nelle stazioni attualmente visualizzate nella mappa, raggruppate per tipo di trasporto. Le stazioni NPC sono incluse solo quando i loro dati sulle merci sono visibili tramite le regole di visibilità della Panoramica Stazione Logica.</t>
+
+      <!-- status messages -->
+      <t id="1000">Nessun dato sulle merci trovato per le stazioni in questa vista della mappa</t>
+
+      <!-- settings: general section -->
+      <t id="20000">Prestazioni</t>
+
+      <!-- settings: data refresh interval -->
+      <t id="20010">Intervallo di aggiornamento dati</t>
+
+      <!-- settings: debug section -->
+      <t id="90000">Debug</t>
+      <t id="90010">Livello di debug</t>
+      <t id="90012">Debug</t>
+      <t id="90013">Traccia</t>
+    </page>
+  </add>
+</diff>

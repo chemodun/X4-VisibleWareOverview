@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- English -->
+<diff>
+  <add sel="/language">
+    <page id="1972092423" title="Visible Ware Overview" descr="" voice="no">
+      <!-- mod identity -->
+      <t id="1">Wares on Visible Stations</t>
+      <t id="2">Lists wares at stations currently rendered in the map view, grouped by transport type. NPC stations are included only when their ware data is visible via the Logical Station Overview visibility rules.</t>
+
+      <!-- status messages -->
+      <t id="1000">No ware data found for stations in this map view</t>
+
+      <!-- settings: general section -->
+      <t id="20000">Performance</t>
+
+      <!-- settings: data refresh interval -->
+      <t id="20010">Data refresh interval</t>
+
+      <!-- settings: debug section -->
+      <t id="90000">Debug</t>
+      <t id="90010">Debug level</t>
+      <t id="90012">Debug</t>
+      <t id="90013">Trace</t>
+    </page>
+  </add>
+</diff>

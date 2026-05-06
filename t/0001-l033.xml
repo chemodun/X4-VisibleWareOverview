@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- French -->
+<diff>
+  <add sel="/language">
+    <page id="1972092423" title="Visible Ware Overview" descr="" voice="no">
+      <!-- mod identity -->
+      <t id="1">Marchandises sur les stations visibles</t>
+      <t id="2">Répertorie les marchandises dans les stations actuellement affichées dans la vue de la carte, regroupées par type de transport. Les stations PNJ sont incluses uniquement lorsque leurs données de marchandises sont visibles via les règles de visibilité de la Vue d'ensemble de la station logique.</t>
+
+      <!-- status messages -->
+      <t id="1000">Aucune donnée de marchandises trouvée pour les stations dans cette vue de la carte</t>
+
+      <!-- settings: general section -->
+      <t id="20000">Performance</t>
+
+      <!-- settings: data refresh interval -->
+      <t id="20010">Intervalle de rafraîchissement des données</t>
+
+      <!-- settings: debug section -->
+      <t id="90000">Débogage</t>
+      <t id="90010">Niveau de débogage</t>
+      <t id="90012">Débogage</t>
+      <t id="90013">Trace</t>
+    </page>
+  </add>
+</diff>

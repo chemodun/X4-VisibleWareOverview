@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Turkish -->
+<diff>
+  <add sel="/language">
+    <page id="1972092423" title="Visible Ware Overview" descr="" voice="no">
+      <!-- mod identity -->
+      <t id="1">Görünür istasyonlardaki mallar</t>
+      <t id="2">Harita görünümünde şu anda görüntülenen istasyonlardaki malları taşıma türüne göre gruplandırarak listeler. NPC istasyonları yalnızca Mantıksal İstasyon Genel Görünümü görünürlük kuralları aracılığıyla mal verileri oyuncuya görünür olduğunda dahil edilir.</t>
+
+      <!-- status messages -->
+      <t id="1000">Bu harita görünümündeki istasyonlar için mal verisi bulunamadı</t>
+
+      <!-- settings: general section -->
+      <t id="20000">Performans</t>
+
+      <!-- settings: data refresh interval -->
+      <t id="20010">Veri yenileme aralığı</t>
+
+      <!-- settings: debug section -->
+      <t id="90000">Hata ayıklama</t>
+      <t id="90010">Hata ayıklama düzeyi</t>
+      <t id="90012">Hata ayıklama</t>
+      <t id="90013">İzleme</t>
+    </page>
+  </add>
+</diff>

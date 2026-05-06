@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- Polish -->
+<diff>
+  <add sel="/language">
+    <page id="1972092423" title="Visible Ware Overview" descr="" voice="no">
+      <!-- mod identity -->
+      <t id="1">Towary na widocznych stacjach</t>
+      <t id="2">Wyświetla towary w stacjach aktualnie widocznych w mapie, pogrupowane według typu transportu. Stacje NPC są uwzględniane tylko wtedy, gdy ich dane towarowe są widoczne za pośrednictwem zasad widoczności Przeglądu Stacji Logistycznej.</t>
+
+      <!-- status messages -->
+      <t id="1000">Nie znaleziono danych towarowych dla stacji w tym widoku mapy</t>
+
+      <!-- settings: general section -->
+      <t id="20000">Wydajność</t>
+
+      <!-- settings: data refresh interval -->
+      <t id="20010">Interwał odświeżania danych</t>
+
+      <!-- settings: debug section -->
+      <t id="90000">Debugowanie</t>
+      <t id="90010">Poziom debugowania</t>
+      <t id="90012">Debugowanie</t>
+      <t id="90013">Śledzenie</t>
+    </page>
+  </add>
+</diff>
