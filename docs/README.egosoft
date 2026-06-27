@@ -27,7 +27,7 @@ As a result, in most cases the data covers only a [b]limited number[/b] of stati
 [list]
 [*] Available on Nexus Mods: [url=https://www.nexusmods.com/x4foundations/mods/552]UI Extensions and HUD[/url]
 [/list]
-[*] [b]X4: Foundations[/b]: Version [b]9.00 beta 3[/b] or higher and [b]UI Extensions and HUD[/b]: Version [b]v9.0.0.0.8.4[/b] or higher by [url=https://next.nexusmods.com/profile/kuertee?gameId=2659]kuertee[/url].
+[*] [b]X4: Foundations[/b]: Version [b]9.00[/b] or higher and [b]UI Extensions and HUD[/b]: Version [b]v9.0.0.5[/b] or higher by [url=https://next.nexusmods.com/profile/kuertee?gameId=2659]kuertee[/url].
 [*] [b]Mod Support APIs[/b]: Version 1.95 or higher by [url=https://next.nexusmods.com/profile/sirnukes?gameId=2659]SirNukes[/url]:
 [list]
 [*] Available on Steam: [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2042901274]SirNukes Mod Support APIs[/url]
@@ -36,7 +36,7 @@ As a result, in most cases the data covers only a [b]limited number[/b] of stati
 [/list]
 [size=130][u]Installation[/u][/size]
 [list]
-[*] [b]Steam Workshop[/b]: [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3721059680]Visible Ware Overview[/url] - only for [b]Game version 8.00[/b] with latest Steam version of the [b]UI Extensions and HUD[/b] mod (version 80.43 from April 8).
+[*] [b]Steam Workshop[/b]: [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3721059680]Visible Ware Overview[/url] - only for [b]Game version 9.00[/b] with latest Steam version of the [b]UI Extensions and HUD[/b] mod.
 [*] [b]Nexus Mods[/b]: [url=https://www.nexusmods.com/x4foundations/mods/2102]Visible Ware Overview[/url]
 [/list]
 [size=130][u]Usage[/u][/size]
@@ -95,6 +95,13 @@ The [b]+/-[/b] button in the column header row expands or collapses all ware row
 [/list]
 [size=130][u]Changelog[/u][/size]
 
+[size=125][u][8.00.02] - 2026-06-27[/u][/size]
+[list]
+[*] [b]Changed[/b]
+[list]
+[*] On Steam: restricted to game version 9.0 or higher
+[/list]
+[/list]
 [size=125][u][8.00.01] - 2026-05-05[/u][/size]
 [list]
 [*] [b]Added[/b]
