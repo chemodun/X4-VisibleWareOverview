@@ -25,14 +25,14 @@ As a result, in most cases the data covers only a **limited number** of stations
 
 - **X4: Foundations**: Version **8.00HF4** or higher and **UI Extensions and HUD**: Version **v8.0.4.x** or higher by [kuertee](https://next.nexusmods.com/profile/kuertee?gameId=2659):
   - Available on Nexus Mods: [UI Extensions and HUD](https://www.nexusmods.com/x4foundations/mods/552)
-- **X4: Foundations**: Version **9.00 beta 3** or higher and **UI Extensions and HUD**: Version **v9.0.0.0.8.4** or higher by [kuertee](https://next.nexusmods.com/profile/kuertee?gameId=2659).
+- **X4: Foundations**: Version **9.00** or higher and **UI Extensions and HUD**: Version **v9.0.0.5** or higher by [kuertee](https://next.nexusmods.com/profile/kuertee?gameId=2659).
 - **Mod Support APIs**: Version 1.95 or higher by [SirNukes](https://next.nexusmods.com/profile/sirnukes?gameId=2659):
   - Available on Steam: [SirNukes Mod Support APIs](https://steamcommunity.com/sharedfiles/filedetails/?id=2042901274)
   - Available on Nexus Mods: [Mod Support APIs](https://www.nexusmods.com/x4foundations/mods/503)
 
 ## Installation
 
-- **Steam Workshop**: [Visible Ware Overview](https://steamcommunity.com/sharedfiles/filedetails/?id=3721059680) - only for **Game version 8.00** with latest Steam version of the `UI Extensions and HUD` mod (version 80.43 from April 8).
+- **Steam Workshop**: [Visible Ware Overview](https://steamcommunity.com/sharedfiles/filedetails/?id=3721059680) - only for **Game version 9.00** with latest Steam version of the `UI Extensions and HUD` mod.
 - **Nexus Mods**: [Visible Ware Overview](https://www.nexusmods.com/x4foundations/mods/2102)
 
 ## Usage
@@ -90,6 +90,11 @@ The **+/-** button in the column header row expands or collapses all ware rows s
 - [SirNukes](https://next.nexusmods.com/profile/sirnukes?gameId=2659) - for the `Mod Support APIs` that power the UI hooks and options menu.
 
 ## Changelog
+
+### [8.00.02] - 2026-06-27
+
+- **Changed**
+  - On Steam: restricted to game version 9.0 or higher
 
 ### [8.00.01] - 2026-05-05
 
