@@ -1,6 +1,6 @@
 [size=140][u]Visible Ware Overview[/u][/size]
 
-Adds a [b]Wares on Visible Stations[/b] tab to the [b]Object List[/b] panel in the map. Lists all wares present at stations currently rendered in the map view, grouped by transport type (Container, Solid, Liquid, Condensate), with total stock, production and consumption per hour, and station count. Each ware row is expandable to a per-station breakdown.
+Adds a [b]Wares on Visible Stations[/b] tab to the [b]Object List[/b] panel in the map. Lists all wares present at stations currently rendered in the map view, or optionally at all known stations of the sectors shown on the map, grouped by transport type (Container, Solid, Liquid, Condensate), with total stock, production and consumption per hour, and station count. Each ware row is expandable to a per-station breakdown.
 
 [size=130][u]Features[/u][/size]
 [list]
@@ -10,6 +10,9 @@ Adds a [b]Wares on Visible Stations[/b] tab to the [b]Object List[/b] panel in t
 [*] [b]Expandable to per-station detail[/b]: Click the [b]+[/b] button on a ware row to expand it and see a sub-row for each station that handles that ware. The sub-row shows the station name with sector below, per-station production/h, consumption/h, and current stock.
 [*] [b]Logical Station Overview button[/b]: Each station sub-row has a button to open the Logical Station Overview for that station.
 [*] [b]Expand/collapse all[/b]: A button in the column header row expands or collapses all ware rows at once.
+[*] [b]Visible sectors option[/b]: Counts every known station in the sectors shown on the map, instead of only the stations the game draws at the current zoom.
+[*] [b]Selected sector[/b]: With a sector selected on the map, only that sector's stations are counted, at any zoom.
+[*] [b]Station limit[/b]: With the visible sectors option, more known stations than the limit (default 150) show a notice instead of the list until you zoom in.
 [*] [b]Empty state[/b]: If no ware data is found for the visible stations, a clear message is shown.
 [*] [b]Cached data[/b]: Ware and station data are refreshed periodically to avoid redundant lookups every render.
 [*] [b]Configurable refresh interval[/b]: The data refresh interval (1-10 ticks, default 3) can be adjusted in [b]Extension options[/b].
@@ -18,8 +21,9 @@ Adds a [b]Wares on Visible Stations[/b] tab to the [b]Object List[/b] panel in t
 [/list]
 [size=130][u]Limitations[/u][/size]
 
-Because [b]Egosoft rejected[/b] the proposal to expose a [b]C.GetMapRenderedSectors(holomap)[/b] function for retrieving the list of sectors currently rendered on the map, this mod falls back to the vanilla approach and works only with stations visible on screen.
-As a result, in most cases the data covers only a [b]limited number[/b] of stations - significantly fewer than the total across all known sectors.
+Because [b]Egosoft rejected[/b] the proposal to expose a [b]C.GetMapRenderedSectors(holomap)[/b] function for retrieving the list of sectors currently rendered on the map, this mod by default follows the vanilla approach and works only with stations drawn on screen.
+At a wide zoom the game draws only some of them, so the data then covers only a [b]limited number[/b] of stations - significantly fewer than the total across all known sectors.
+The option [b]Show all stations of the visible sectors[/b] works around this: the mod finds the sectors on screen itself and counts all their known stations.
 
 [size=130][u]Requirements[/u][/size]
 [list]
@@ -33,12 +37,31 @@ As a result, in most cases the data covers only a [b]limited number[/b] of stati
 [*] Available on Steam: [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2042901274]SirNukes Mod Support APIs[/url]
 [*] Available on Nexus Mods: [url=https://www.nexusmods.com/x4foundations/mods/503]Mod Support APIs[/url]
 [/list]
+[*] [b]Options Helper[/b]: Version 1.10 or higher.
+[list]
+[*] Available on Steam: [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3715253556]Options Helper[/url]
+[*] Available on Nexus Mods: [url=https://www.nexusmods.com/x4foundations/mods/2089]Options Helper[/url]
+[/list]
+[*] [b]Print Extension List[/b]: Version 1.00 or higher.
+[list]
+[*] Available on Steam: [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3770927339]Print Extension List[/url]
+[*] Available on Nexus Mods: [url=https://www.nexusmods.com/x4foundations/mods/2191]Print Extension List[/url]
+[/list]
+[*] [b]Lua Log API[/b]: Version 1.00 or higher.
+[list]
+[*] Available on Steam: [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3823580916]Lua Log API[/url]
+[*] Available on Nexus Mods: [url=https://www.nexusmods.com/x4foundations/mods/2473]Lua Log API[/url]
+[/list]
 [/list]
 [size=130][u]Installation[/u][/size]
 [list]
 [*] [b]Steam Workshop[/b]: [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3721059680]Visible Ware Overview[/url] - only for [b]Game version 9.00[/b] with latest Steam version of the [b]UI Extensions and HUD[/b] mod.
 [*] [b]Nexus Mods[/b]: [url=https://www.nexusmods.com/x4foundations/mods/2102]Visible Ware Overview[/url]
 [/list]
+[size=130][u]Save state[/u][/size]
+
+[b]No[/b] (removing the extension does not break saves).
+
 [size=130][u]Usage[/u][/size]
 
 Open the map and click the [b]Wares on Visible Stations[/b] tab in the Object List panel tab strip. The tab is visible whenever you are on any map view.
@@ -73,11 +96,26 @@ Click [b]+[/b] on a ware row to expand it. Each station that handles the ware ge
 
 The [b]+/-[/b] button in the column header row expands or collapses all ware rows simultaneously.
 
+[size=125][u]Visible sectors[/u][/size]
+
+The header above the list names what is counted:
+[list]
+[*] [b]Sector:[/b] with a sector name - all counted stations are in that sector: the one under the camera, or the sector selected on the map.
+[*] [b]Visible sectors[/b] with their number, and [b]Stations:[/b] with the station count - the stations come from several sectors.
+[/list]
+With a sector selected (click the background of a sector on the map), the tab counts only that sector's known stations, whatever the zoom. Without one, it counts the stations the game draws on the map; at a wide zoom these are only a few of them.
+
+The option [b]Show all stations of the visible sectors[/b] counts every known station of the sectors shown on the map instead. A sector counts when at least half of it is on the screen; when none is, the one covering most of the screen counts. With more known stations than the limit set in the options, a notice replaces the list until you zoom in; 0 removes the limit. Several hundred stations slow the game down at every refresh of the list.
+
+[spoiler][img]https://raw.githubusercontent.com/chemodun/X4-VisibleWareOverview/refs/heads/main/docs/images/visible_sectors.png[/img][/spoiler]
+
 [size=125][u]Extension options[/u][/size]
 
-[b]Options Menu > Extension options > Visible Ware Overview[/b]:
+[b]Options Menu > Extension options > Wares on Visible Stations[/b]:
 [list]
+[*] [b]Show all stations of the visible sectors[/b] (off by default): counts every known station of the sectors shown on the map, see [b]Visible sectors[/b] above.
 [*] [b]Data refresh interval[/b] (1-10, default 3): Number of UI ticks between data refreshes. Lower values keep ware data more up to date; higher values reduce CPU usage.
+[*] [b]Visible sectors: maximum number of stations to list[/b] (0-2000, default 150, 0 = no limit): with the option above, more known stations than this show a notice instead of the list.
 [*] [b]Debug level[/b]: Sets the verbosity of debug logging (None / Debug / Trace). Intended for troubleshooting.
 [/list]
 [spoiler][img]https://raw.githubusercontent.com/chemodun/X4-VisibleWareOverview/refs/heads/main/docs/images/options.png[/img][/spoiler]
@@ -95,6 +133,27 @@ The [b]+/-[/b] button in the column header row expands or collapses all ware row
 [/list]
 [size=130][u]Changelog[/u][/size]
 
+[size=125][u][8.00.03] - 2026-11-22[/u][/size]
+[list]
+[*] [b]Added[/b]
+[list]
+[*] Option to count all known stations of the sectors shown on the map.
+[*] Limit on the number of stations counted with that option.
+[*] A sector selected on the map limits the list to that sector.
+[*] Bulgarian translation.
+[/list]
+[*] [b]Changed[/b]
+[list]
+[*] [b]Options Helper[/b] 1.10 and [b]Print Extension List[/b] are now required.
+[*] Log messages go through the Lua Log API, now a required mod.
+[/list]
+[*] [b]Fixed[/b]
+[list]
+[*] The list header named the sector under the camera while the stations came from several sectors.
+[*] Saved settings were not applied after loading a game.
+[*] Japanese, Korean and Chinese texts now use the game's own word for station.
+[/list]
+[/list]
 [size=125][u][8.00.02] - 2026-06-27[/u][/size]
 [list]
 [*] [b]Changed[/b]
