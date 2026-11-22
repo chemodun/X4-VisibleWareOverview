@@ -6,21 +6,29 @@
       <!-- mod identity -->
       <t id="1">Towary na widocznych stacjach</t>
       <t id="2">Wyświetla towary w stacjach aktualnie widocznych w mapie, pogrupowane według typu transportu. Stacje NPC są uwzględniane tylko wtedy, gdy ich dane towarowe są widoczne za pośrednictwem zasad widoczności Przeglądu Stacji Logistycznej.</t>
+      <t id="3">Widoczne sektory</t>
 
       <!-- status messages -->
       <t id="1000">Nie znaleziono danych towarowych dla stacji w tym widoku mapy</t>
+      <t id="1003">%d stacji w widocznych sektorach, limit wynosi %d. Przybliż mapę, aby je wyświetlić.</t>
+
+      <!-- settings: general options -->
+      <t id="10000">Ogólne</t>
+      <t id="10020">Pokaż wszystkie stacje widocznych sektorów</t>
 
       <!-- settings: general section -->
       <t id="20000">Wydajność</t>
 
       <!-- settings: data refresh interval -->
       <t id="20010">Interwał odświeżania danych</t>
+      <t id="20020">Widoczne sektory: maksymalna liczba wyświetlanych stacji \(0 = bez limitu\)</t>
 
       <!-- settings: debug section -->
-      <t id="90000">Debugowanie</t>
-      <t id="90010">Poziom debugowania</t>
-      <t id="90012">Debugowanie</t>
-      <t id="90013">Śledzenie</t>
+      <t id="90900">Debugowanie</t>
+      <t id="90910">Poziom debugowania</t>
+      <t id="90911">Brak</t>
+      <t id="90912">Debugowanie</t>
+      <t id="90913">Ślad</t>
     </page>
   </add>
 </diff>

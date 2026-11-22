@@ -6,21 +6,29 @@
       <!-- mod identity -->
       <t id="1">Marchandises sur les stations visibles</t>
       <t id="2">Répertorie les marchandises dans les stations actuellement affichées dans la vue de la carte, regroupées par type de transport. Les stations PNJ sont incluses uniquement lorsque leurs données de marchandises sont visibles via les règles de visibilité de la Vue d'ensemble de la station logique.</t>
+      <t id="3">Secteurs visibles</t>
 
       <!-- status messages -->
       <t id="1000">Aucune donnée de marchandises trouvée pour les stations dans cette vue de la carte</t>
+      <t id="1003">%d stations dans les secteurs visibles, la limite est de %d. Zoomez pour les afficher.</t>
+
+      <!-- settings: general options -->
+      <t id="10000">Général</t>
+      <t id="10020">Afficher toutes les stations des secteurs visibles</t>
 
       <!-- settings: general section -->
       <t id="20000">Performance</t>
 
       <!-- settings: data refresh interval -->
       <t id="20010">Intervalle de rafraîchissement des données</t>
+      <t id="20020">Secteurs visibles : nombre maximal de stations à afficher \(0 = sans limite\)</t>
 
       <!-- settings: debug section -->
-      <t id="90000">Débogage</t>
-      <t id="90010">Niveau de débogage</t>
-      <t id="90012">Débogage</t>
-      <t id="90013">Trace</t>
+      <t id="90900">Débogage</t>
+      <t id="90910">Niveau de débogage</t>
+      <t id="90911">Aucun</t>
+      <t id="90912">Débogage</t>
+      <t id="90913">Trace</t>
     </page>
   </add>
 </diff>

@@ -6,21 +6,29 @@
       <!-- mod identity -->
       <t id="1">Waren auf sichtbaren Stationen</t>
       <t id="2">Listet Waren in Stationen auf, die derzeit in der Kartenansicht angezeigt werden, nach Transporttyp gruppiert. NPC-Stationen werden nur einbezogen, wenn ihre Warendaten gemäß den Sichtbarkeitsregeln der Logistischen Stationsübersicht sichtbar sind.</t>
+      <t id="3">Sichtbare Sektoren</t>
 
       <!-- status messages -->
       <t id="1000">Keine Warendaten für Stationen in dieser Kartenansicht gefunden</t>
+      <t id="1003">%d Stationen in den sichtbaren Sektoren, das Limit ist %d. Heranzoomen, um sie aufzulisten.</t>
+
+      <!-- settings: general options -->
+      <t id="10000">Allgemein</t>
+      <t id="10020">Alle Stationen der sichtbaren Sektoren anzeigen</t>
 
       <!-- settings: general section -->
       <t id="20000">Leistung</t>
 
       <!-- settings: data refresh interval -->
       <t id="20010">Daten-Aktualisierungsintervall</t>
+      <t id="20020">Sichtbare Sektoren: maximale Anzahl aufgelisteter Stationen \(0 = kein Limit\)</t>
 
       <!-- settings: debug section -->
-      <t id="90000">Fehlersuche</t>
-      <t id="90010">Fehlersuchstufe</t>
-      <t id="90012">Fehlersuche</t>
-      <t id="90013">Ablaufverfolgung</t>
+      <t id="90900">Debug</t>
+      <t id="90910">Debug-Stufe</t>
+      <t id="90911">Keine</t>
+      <t id="90912">Debug</t>
+      <t id="90913">Ablaufverfolgung</t>
     </page>
   </add>
 </diff>

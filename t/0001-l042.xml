@@ -6,21 +6,29 @@
       <!-- mod identity -->
       <t id="1">Zboží na viditelných stanicích</t>
       <t id="2">Zobrazuje zboží ve stanicích aktuálně zobrazených v mapě, seskupených podle typu přepravy. Stanice NPC jsou zahrnuty pouze tehdy, když jsou jejich data o zboží viditelná prostřednictvím pravidel viditelnosti Přehledu logistické stanice.</t>
+      <t id="3">Viditelné sektory</t>
 
       <!-- status messages -->
       <t id="1000">Pro stanice v tomto pohledu mapy nebyla nalezena žádná data o zboží</t>
+      <t id="1003">%d stanic ve viditelných sektorech, limit je %d. Přibližte mapu pro jejich zobrazení.</t>
+
+      <!-- settings: general options -->
+      <t id="10000">Obecné</t>
+      <t id="10020">Zobrazit všechny stanice viditelných sektorů</t>
 
       <!-- settings: general section -->
       <t id="20000">Výkon</t>
 
       <!-- settings: data refresh interval -->
       <t id="20010">Interval obnovy dat</t>
+      <t id="20020">Viditelné sektory: maximální počet zobrazených stanic \(0 = bez omezení\)</t>
 
       <!-- settings: debug section -->
-      <t id="90000">Ladění</t>
-      <t id="90010">Úroveň ladění</t>
-      <t id="90012">Ladění</t>
-      <t id="90013">Trasování</t>
+      <t id="90900">Ladění</t>
+      <t id="90910">Úroveň ladění</t>
+      <t id="90911">Žádná</t>
+      <t id="90912">Ladění</t>
+      <t id="90913">Trasování</t>
     </page>
   </add>
 </diff>

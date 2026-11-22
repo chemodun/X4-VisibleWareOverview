@@ -6,21 +6,29 @@
       <!-- mod identity -->
       <t id="1">Mercadorias nas estações visíveis</t>
       <t id="2">Lista as mercadorias nas estações atualmente exibidas na vista do mapa, agrupadas por tipo de transporte. As estações NPC são incluídas apenas quando seus dados de mercadorias são visíveis pelas regras de visibilidade da Visão Geral da Estação Lógica.</t>
+      <t id="3">Setores visíveis</t>
 
       <!-- status messages -->
       <t id="1000">Nenhum dado de mercadorias encontrado para estações nesta vista do mapa</t>
+      <t id="1003">%d estações nos setores visíveis, o limite é %d. Aproxime o mapa para listá-las.</t>
+
+      <!-- settings: general options -->
+      <t id="10000">Geral</t>
+      <t id="10020">Mostrar todas as estações dos setores visíveis</t>
 
       <!-- settings: general section -->
       <t id="20000">Desempenho</t>
 
       <!-- settings: data refresh interval -->
       <t id="20010">Intervalo de atualização de dados</t>
+      <t id="20020">Setores visíveis: número máximo de estações a listar \(0 = sem limite\)</t>
 
       <!-- settings: debug section -->
-      <t id="90000">Depuração</t>
-      <t id="90010">Nível de depuração</t>
-      <t id="90012">Depuração</t>
-      <t id="90013">Rastreamento</t>
+      <t id="90900">Depuração</t>
+      <t id="90910">Nível de depuração</t>
+      <t id="90911">Nenhum</t>
+      <t id="90912">Depuração</t>
+      <t id="90913">Rastreamento</t>
     </page>
   </add>
 </diff>

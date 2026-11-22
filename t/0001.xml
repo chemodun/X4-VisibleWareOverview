@@ -1,19 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- English -->
 <diff>
-    <add sel="/language">
-        <page id="1972092423" title="Visible Ware Overview" descr="" voice="no">
-            <!-- mod identity -->
-            <t id="1">Wares on Visible Stations</t>
-            <t id="2">Lists wares at stations currently rendered in the map view, grouped by transport type. NPC stations are included only when their ware data is visible via the Logical Station Overview visibility rules.</t>
+  <add sel="/language">
+    <page id="1972092423" title="Visible Ware Overview" descr="" voice="no">
+      <!-- mod identity -->
+      <t id="1">Wares on Visible Stations</t>
+      <t id="2">Lists wares at stations currently rendered in the map view, grouped by transport type. NPC stations are included only when their ware data is visible via the Logical Station Overview visibility rules.</t>
+      <t id="3">Visible sectors</t>
 
-            <!-- status messages -->
-            <t id="1000">No ware data found for stations in this map view</t>
+      <!-- status messages -->
+      <t id="1000">No ware data found for stations in this map view</t>
+      <t id="1003">%d stations in the visible sectors, the limit is %d. Zoom in to list them.</t>
 
-            <!-- settings: debug section -->
-            <t id="90000">Debug</t>
-            <t id="90010">Debug level</t>
-            <t id="90012">Debug</t>
-            <t id="90013">Trace</t>
-        </page>
-    </add>
+      <!-- settings: general options -->
+      <t id="10000">General</t>
+      <t id="10020">Show all stations of the visible sectors</t>
+
+      <!-- settings: general section -->
+      <t id="20000">Performance</t>
+
+      <!-- settings: data refresh interval -->
+      <t id="20010">Data refresh interval</t>
+      <t id="20020">Visible sectors: maximum number of stations to list \(0 = no limit\)</t>
+
+      <!-- settings: debug section -->
+      <t id="90900">Debug</t>
+      <t id="90910">Debug Level</t>
+      <t id="90911">None</t>
+      <t id="90912">Debug</t>
+      <t id="90913">Trace</t>
+    </page>
+  </add>
 </diff>

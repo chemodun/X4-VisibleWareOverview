@@ -6,21 +6,29 @@
       <!-- mod identity -->
       <t id="1">Merci nelle stazioni visibili</t>
       <t id="2">Elenca le merci nelle stazioni attualmente visualizzate nella mappa, raggruppate per tipo di trasporto. Le stazioni NPC sono incluse solo quando i loro dati sulle merci sono visibili tramite le regole di visibilità della Panoramica Stazione Logica.</t>
+      <t id="3">Settori visibili</t>
 
       <!-- status messages -->
       <t id="1000">Nessun dato sulle merci trovato per le stazioni in questa vista della mappa</t>
+      <t id="1003">%d stazioni nei settori visibili, il limite è %d. Ingrandisci per elencarle.</t>
+
+      <!-- settings: general options -->
+      <t id="10000">Generale</t>
+      <t id="10020">Mostra tutte le stazioni dei settori visibili</t>
 
       <!-- settings: general section -->
       <t id="20000">Prestazioni</t>
 
       <!-- settings: data refresh interval -->
       <t id="20010">Intervallo di aggiornamento dati</t>
+      <t id="20020">Settori visibili: numero massimo di stazioni da elencare \(0 = nessun limite\)</t>
 
       <!-- settings: debug section -->
-      <t id="90000">Debug</t>
-      <t id="90010">Livello di debug</t>
-      <t id="90012">Debug</t>
-      <t id="90013">Traccia</t>
+      <t id="90900">Debug</t>
+      <t id="90910">Livello di debug</t>
+      <t id="90911">Nessuno</t>
+      <t id="90912">Debug</t>
+      <t id="90913">Traccia</t>
     </page>
   </add>
 </diff>

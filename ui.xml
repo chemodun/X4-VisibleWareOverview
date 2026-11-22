@@ -2,8 +2,10 @@
 <addon name="visible_ware_overview" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../ui/core/addon.xsd">
     <environment type="menus">
         <dependency name="sn_mod_support_apis" />
+        <dependency name="lua_log_api" />
         <dependency name="ego_detailmonitor" />
         <dependency name="kuertee_ui_extensions" />
+        <file name="ui/map_visible_sectors.lua" />
         <file name="ui/visible_ware_overview.lua" />
     </environment>
 </addon>

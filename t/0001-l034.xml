@@ -6,21 +6,29 @@
       <!-- mod identity -->
       <t id="1">Mercancías en estaciones visibles</t>
       <t id="2">Enumera las mercancías en las estaciones actualmente mostradas en la vista del mapa, agrupadas por tipo de transporte. Las estaciones PNJ se incluyen solo cuando sus datos de mercancías son visibles mediante las reglas de visibilidad de la Vista General de Estación Lógica.</t>
+      <t id="3">Sectores visibles</t>
 
       <!-- status messages -->
       <t id="1000">No se encontraron datos de mercancías para las estaciones en esta vista del mapa</t>
+      <t id="1003">%d estaciones en los sectores visibles, el límite es %d. Acerca la vista para mostrarlas.</t>
+
+      <!-- settings: general options -->
+      <t id="10000">General</t>
+      <t id="10020">Mostrar todas las estaciones de los sectores visibles</t>
 
       <!-- settings: general section -->
       <t id="20000">Rendimiento</t>
 
       <!-- settings: data refresh interval -->
       <t id="20010">Intervalo de actualización de datos</t>
+      <t id="20020">Sectores visibles: número máximo de estaciones a mostrar \(0 = sin límite\)</t>
 
       <!-- settings: debug section -->
-      <t id="90000">Depuración</t>
-      <t id="90010">Nivel de depuración</t>
-      <t id="90012">Depuración</t>
-      <t id="90013">Seguimiento</t>
+      <t id="90900">Depuración</t>
+      <t id="90910">Nivel de depuración</t>
+      <t id="90911">Ninguno</t>
+      <t id="90912">Depuración</t>
+      <t id="90913">Rastreo</t>
     </page>
   </add>
 </diff>

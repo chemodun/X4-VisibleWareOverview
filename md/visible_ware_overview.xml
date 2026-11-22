@@ -15,7 +15,7 @@
 
     <!-- Reads (or initialises) mod config from player.entity.$visibleWareOverviewConfig.
          Leaves a local $config reference; caller must <remove_value name="$config" />. -->
-    <library name="DefaultConfig" purpose="include_actions" version="1">
+    <library name="DefaultConfig" purpose="include_actions" version="2">
       <actions>
         <do_if value="@player.entity.$visibleWareOverviewConfig == null">
           <set_value name="player.entity.$visibleWareOverviewConfig" exact="table[
@@ -25,11 +25,17 @@
         </do_if>
         <set_value name="$config" exact="player.entity.$visibleWareOverviewConfig" />
         <!-- forward-compat: fill keys added in later versions -->
+        <do_if value="$config.$visibleSectors? == false">
+          <set_value name="$config.$visibleSectors" exact="false" />
+        </do_if>
         <do_if value="$config.$debugMode? == false">
           <set_value name="$config.$debugMode" exact="'none'" />
         </do_if>
         <do_if value="$config.$dataRefreshInterval? == false">
           <set_value name="$config.$dataRefreshInterval" exact="3" />
+        </do_if>
+        <do_if value="$config.$maxSectorStations? == false">
+          <set_value name="$config.$maxSectorStations" exact="150" />
         </do_if>
       </actions>
     </library>
@@ -51,12 +57,26 @@
       </actions>
     </cue>
 
-    <cue name="Visible_Ware_Overview_Options_Menu" instantiate="true" version="1">
+    <cue name="Visible_Ware_Overview_Options_Menu" instantiate="true" version="2">
       <conditions>
         <event_cue_signalled />
       </conditions>
       <actions>
         <include_actions ref="DefaultConfig" />
+
+        <!-- Section: General -->
+        <run_actions ref="md.Options_Helper.Add_Title_Row">
+          <param name="title" value="{1972092423, 10000}" />
+          <param name="columns" value="12" />
+        </run_actions>
+        <run_actions ref="md.Options_Helper.Add_Checkbox">
+          <param name="id" value="'visibleSectors'" />
+          <param name="col" value="1" />
+          <param name="textColSpan" value="11" />
+          <param name="text" value="{1972092423, 10020}" />
+          <param name="data" value="$config" />
+          <param name="handle" value="Handle_Checkbox_Changed" />
+        </run_actions>
 
         <!-- Section: Performance -->
         <run_actions ref="md.Options_Helper.Add_Title_Row">
@@ -76,16 +96,26 @@
           <param name="data" value="$config" />
           <param name="handle" value="Handle_Slider_Changed" />
         </run_actions>
+        <run_actions ref="md.Options_Helper.Add_Slider">
+          <param name="id" value="'maxSectorStations'" />
+          <param name="text" value="{1972092423, 20020}" />
+          <param name="min" value="0" />
+          <param name="max" value="2000" />
+          <param name="step" value="50" />
+          <param name="colSpan" value="12" />
+          <param name="data" value="$config" />
+          <param name="handle" value="Handle_Slider_Changed" />
+        </run_actions>
 
         <!-- Section: Debug -->
         <run_actions ref="md.Options_Helper.Add_Title_Row">
-          <param name="title" value="{1972092423, 90000}" />
+          <param name="title" value="{1972092423, 90900}" />
           <param name="columns" value="12" />
         </run_actions>
         <set_value name="$debugOptions" exact="[
-          table[$text = {1001, 34},          $value = 'none'],
-          table[$text = {1972092423, 90012}, $value = 'debug'],
-          table[$text = {1972092423, 90013}, $value = 'trace'],
+          table[$text = {1972092423, 90911}, $value = 'none'],
+          table[$text = {1972092423, 90912}, $value = 'debug'],
+          table[$text = {1972092423, 90913}, $value = 'trace'],
         ]" />
         <set_value name="$currentIndex" exact="1" />
         <do_if value="$config.$debugMode == 'debug'">
@@ -100,12 +130,26 @@
           <param name="currentIndex" value="$currentIndex" />
           <param name="col" value="1" />
           <param name="textColSpan" value="7" />
-          <param name="text" value="{1972092423, 90010}" />
+          <param name="text" value="{1972092423, 90910}" />
           <param name="dropdownColSpan" value="5" />
           <param name="handle" value="Handle_Dropdown_Changed" />
         </run_actions>
         <remove_value name="$debugOptions" />
         <remove_value name="$currentIndex" />
+        <remove_value name="$config" />
+      </actions>
+    </cue>
+
+    <cue name="Handle_Checkbox_Changed" instantiate="true" version="1">
+      <conditions>
+        <event_cue_signalled />
+      </conditions>
+      <actions>
+        <include_actions ref="DefaultConfig" />
+        <set_value name="$resultTable" exact="$config" />
+        <include_actions ref="md.Options_Helper.Process_Checkbox_Changed" />
+        <remove_value name="$resultTable" />
+        <raise_lua_event name="'VisibleWareOverview.ConfigChanged'" />
         <remove_value name="$config" />
       </actions>
     </cue>

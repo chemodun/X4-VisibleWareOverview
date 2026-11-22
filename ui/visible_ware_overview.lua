@@ -18,7 +18,7 @@
 local ffi = require("ffi")
 local C   = ffi.C
 
-ffi.cdef[[
+ffi.cdef [[
   typedef uint64_t UniverseID;
 
   typedef struct {
@@ -45,12 +45,17 @@ local PAGE_ID  = 1972092423
 local MODE     = "visibleWareOverview"
 local TAB_ICON = "mapst_fs_trade"
 
+-- Visible sectors option: a sector counts with half of its hex on screen, else the one covering most of the screen
+local MAP_VISIBLE_SECTORS = "1.00"
+local VS                  = __MAP_VISIBLE_SECTORS[MAP_VISIBLE_SECTORS]
+local VISIBLE_RULE        = { minHexShare = 0.5, largest = true }
+
 -- Transport type display order (matches ware_overview_tab convention).
 local TRANSPORT_ORDER = { "container", "solid", "liquid", "condensate" }
 local TRANSPORT_TEXT_IDS = {
-  container  = { page = 20109, id = 101  },
-  solid      = { page = 20109, id = 301  },
-  liquid     = { page = 20109, id = 601  },
+  container = { page = 20109, id = 101 },
+  solid = { page = 20109, id = 301 },
+  liquid = { page = 20109, id = 601 },
   condensate = { page = 20109, id = 9801 },
 }
 
@@ -60,6 +65,10 @@ local vwo = {
   menuMap       = nil,
   menuMapConfig = {},
   isV9          = C.GetGameVersion().major >= 9,
+  playerId      = nil,
+  visibleSectors = false, -- true: all known stations of the sectors on the map view
+  sectorCache    = nil,   -- { key, turnCounter, playerStations, npcStations } of the last sector set
+  maxSectorStations = 150, -- more known stations than this in the visible sectors: a notice, no wares; 0 = no limit
 
   -- Ware expand state: vwo.expandedWares[wareId] = true when that row is open.
   expandedWares = {},
@@ -88,14 +97,14 @@ local vwo = {
 local debugLevel = "none"   -- "none" | "debug" | "trace"
 
 local function debug(msg)
-  if debugLevel ~= "none" and type(DebugError) == "function" then
-    DebugError("VisibleWareOverview: " .. msg)
+  if debugLevel ~= "none" then
+    UIDebug("VisibleWareOverview: " .. msg)
   end
 end
 
 local function trace(msg)
   if debugLevel == "trace" then
-    debug(msg)
+    UITrace("VisibleWareOverview: " .. msg)
   end
 end
 
@@ -163,22 +172,22 @@ end
 --- isNpc     : boolean
 local function accumulateStation(wareData, luaId, station64, isNpc)
   local name, sectorName = GetComponentData(luaId, "name", "sector")
-  name       = name       or ""
+  name = name or ""
   sectorName = sectorName or ""
 
   local cargo, products, allResources, tradeWares =
       GetComponentData(luaId, "cargo", "products", "allresources", "tradewares")
-  cargo        = cargo        or {}
-  products     = products     or {}
+  cargo = cargo or {}
+  products = products or {}
   allResources = allResources or {}
-  tradeWares   = tradeWares   or {}
+  tradeWares = tradeWares or {}
 
   -- Union of all ware IDs this station handles.
   local wareSet = {}
-  for ware in pairs(cargo)            do wareSet[ware] = true end
-  for _, ware in ipairs(products)     do wareSet[ware] = true end
+  for ware in pairs(cargo) do wareSet[ware] = true end
+  for _, ware in ipairs(products) do wareSet[ware] = true end
   for _, ware in ipairs(allResources) do wareSet[ware] = true end
-  for _, ware in ipairs(tradeWares)   do wareSet[ware] = true end
+  for _, ware in ipairs(tradeWares) do wareSet[ware] = true end
 
   if not next(wareSet) then return end
 
@@ -192,9 +201,9 @@ local function accumulateStation(wareData, luaId, station64, isNpc)
 
     if stockAtStation > 0 or prodAtStation > 0 or consAtStation > 0 then
       entry.stationCount = entry.stationCount + 1
-      entry.stock        = entry.stock        + stockAtStation
-      entry.production   = entry.production   + prodAtStation
-      entry.consumption  = entry.consumption  + consAtStation
+      entry.stock = entry.stock + stockAtStation
+      entry.production = entry.production + prodAtStation
+      entry.consumption = entry.consumption + consAtStation
       table.insert(entry.stations, {
         id         = luaId,
         id64       = station64,
@@ -260,6 +269,91 @@ local function collectAllWareData(playerStations, npcStations)
   return wareData
 end
 
+--- The sector selected on the map, nil when the selection is no sector.
+local function selectedSector()
+  local selected = vwo.menuMap.infoSubmenuObject
+  if selected and (selected ~= 0) and C.IsComponentClass(selected, "sector") then
+    return ConvertStringTo64Bit(tostring(selected))
+  end
+  return nil
+end
+
+--- Known stations of the selected sector, else of the sectors on the map view, split like
+--- infoTableData.playerStations / npcStations.
+local function sectorStations(selected)
+  local menuMap = vwo.menuMap
+  local sectors, key
+  if selected then
+    sectors, key = { selected }, "selected:" .. tostring(selected)
+  else
+    sectors, key = VS.get(menuMap.holomap, menuMap.rendertargetWidth, menuMap.rendertargetHeight, VISIBLE_RULE)
+  end
+  local cache = vwo.sectorCache
+  if cache and (cache.key == key) and (cache.turnCounter < vwo.dataRefreshInterval) then
+    cache.turnCounter = cache.turnCounter + 1
+    return cache.playerStations, cache.npcStations, cache.sectors
+  end
+  local playerStations, npcStations = {}, {}
+  for _, sector in ipairs(sectors) do
+    for _, station in ipairs(GetContainedStations(sector, true)) do
+      if GetComponentData(station, "isplayerowned") then
+        playerStations[#playerStations + 1] = station
+      else
+        npcStations[#npcStations + 1] = station
+      end
+    end
+  end
+  trace("visible sectors: " .. tostring(#sectors) .. ", stations: " .. tostring(#playerStations) .. " player + "
+    .. tostring(#npcStations) .. " npc")
+  vwo.sectorCache = { key = key, turnCounter = 1, sectors = sectors, playerStations = playerStations, npcStations = npcStations }
+  return playerStations, npcStations, sectors
+end
+
+--- Sectors holding the given stations, as 64-bit ids.
+local function sectorsOf(playerStations, npcStations)
+  local sectors, seen = {}, {}
+  for _, list in ipairs({ playerStations, npcStations }) do
+    for _, station in ipairs(list) do
+      local sector = GetComponentData(station, "sectorid")
+      local key = tostring(sector)
+      if sector and not seen[key] then
+        seen[key] = true
+        sectors[#sectors + 1] = ConvertIDTo64Bit(sector)
+      end
+    end
+  end
+  return sectors
+end
+
+--- Vanilla heads the list with the sector under the camera: name the selected sector or the visible sectors, and
+--- their stations, instead.
+local function retitleList(ftable, sectors, stationCount, selected)
+  local menuMap = vwo.menuMap
+  local current = menuMap.currentsector and ConvertStringTo64Bit(tostring(menuMap.currentsector))
+  if (#sectors == 1) and (sectors[1] == current) then return end
+  for index, row in ipairs(ftable.rows) do
+    local cell = row[1]
+    if cell and (cell.type == "text") and (cell.properties.text == menuMap.title) then
+      if selected then
+        cell.properties.text = ReadText(20001, 201) .. ReadText(1001, 120) .. " " .. tostring(GetComponentData(selected, "name"))
+      else
+        cell.properties.text = string.format("%s (%d)", ReadText(PAGE_ID, 3), #sectors)
+      end
+      local ownerRow = ftable.rows[index + 1]
+      local ownerCell = ownerRow and ownerRow[1]
+      local stationsText = ReadText(1001, 4) .. ReadText(1001, 120) .. " " .. tostring(stationCount)
+      if ownerCell and (ownerCell.type == "text") and (type(ownerCell.properties.text) == "function") then
+        ownerCell.properties.text = stationsText
+      elseif ownerCell and (ownerCell.type == "icon") and ownerRow[2] and (ownerRow[2].type == "text") then
+        -- 8.00: the owner icon and name are two cells
+        ownerCell.properties.color = Color["icon_hidden"]
+        ownerRow[2].properties.text = stationsText
+      end
+      break
+    end
+  end
+end
+
 --- Return cached ware data, rebuilding when the station list changes or cache is stale.
 local function getWareData(playerStations, npcStations)
   local hash = stationListHash(playerStations, npcStations)
@@ -269,7 +363,7 @@ local function getWareData(playerStations, npcStations)
       or vwo.dataCache.turnCounter >= vwo.dataRefreshInterval then
     trace("rebuilding ware cache for "
       .. tostring(#playerStations) .. " player + "
-      .. tostring(#npcStations)    .. " npc stations")
+      .. tostring(#npcStations) .. " npc stations")
     local data = collectAllWareData(playerStations, npcStations)
     vwo.dataCache = {
       turnCounter     = 1,
@@ -340,7 +434,7 @@ local function createStationSubRow(tblOrGroup, stEntry, maxIcons)
   local displayText = Helper.convertColorToText(color) .. name .. "\027X"
       .. "\n" .. sectorName
 
-  local row = tblOrGroup:addRow({"property", stEntry.id, nil, 1}, {
+  local row = tblOrGroup:addRow({ "property", stEntry.id, nil, 1 }, {
     bgColor       = bgColor,
     multiSelected = vwo.menuMap.isSelectedComponent(stEntry.id),
   })
@@ -349,7 +443,7 @@ local function createStationSubRow(tblOrGroup, stEntry, maxIcons)
   local rowHeight = row[2]:getMinTextHeight(true)
 
   -- Production/h (dark green).
-  row[3]:createText(fmtRate(stEntry.production),  { halign = "right", color = Color["text_player_lowlight"] })
+  row[3]:createText(fmtRate(stEntry.production), { halign = "right", color = Color["text_player_lowlight"] })
 
   -- Consumption/h (dark red).
   row[4]:createText(fmtRate(stEntry.consumption), { halign = "right", color = Color["faction_xenon"] })
@@ -389,7 +483,20 @@ function vwo.displayTabData(numDisplayed, instance, ftable, infoTableData)
   if vwo.menuMap.mode == "selectCV" then return { numdisplayed = numDisplayed } end
 
   local playerStations = infoTableData.playerStations or {}
-  local npcStations    = infoTableData.npcStations    or {}
+  local npcStations = infoTableData.npcStations or {}
+  local tooMany = nil
+  local selected = selectedSector()
+  if vwo.visibleSectors or selected then
+    local sectors
+    playerStations, npcStations, sectors = sectorStations(selected)
+    retitleList(ftable, sectors, #playerStations + #npcStations, selected)
+    if (not selected) and (vwo.maxSectorStations > 0) and (#playerStations + #npcStations > vwo.maxSectorStations) then
+      tooMany = #playerStations + #npcStations
+      playerStations, npcStations = {}, {}
+    end
+  elseif #playerStations + #npcStations > 0 then
+    retitleList(ftable, sectorsOf(playerStations, npcStations), #playerStations + #npcStations)
+  end
   local wareData       = getWareData(playerStations, npcStations)
   local maxIcons       = infoTableData.maxIcons or 5
 
@@ -434,10 +541,10 @@ function vwo.displayTabData(numDisplayed, instance, ftable, infoTableData)
     vwo.menuMap.noupdate = true
     vwo.menuMap.refreshInfoFrame()
   end
-  chRow[2]:createText(ReadText(1001, 45),   Helper.headerRowCenteredProperties)   -- Ware
+  chRow[2]:createText(ReadText(1001, 45), Helper.headerRowCenteredProperties) -- Ware
   chRow[3]:createText(ReadText(1001, 1600), Helper.headerRowCenteredProperties)   -- Production
   chRow[4]:createText(ReadText(1001, 1609), Helper.headerRowCenteredProperties)   -- Consumption
-  chRow[maxIcons]:setColSpan(4):createText(ReadText(1001, 20),  Helper.headerRowCenteredProperties)  -- Stock
+  chRow[maxIcons]:setColSpan(4):createText(ReadText(1001, 20), Helper.headerRowCenteredProperties) -- Stock
   chRow[maxIcons + 4]:setColSpan(2):createText(ReadText(1001, 4), Helper.headerRowCenteredProperties) -- Stations
   numDisplayed = numDisplayed + 1
 
@@ -526,7 +633,8 @@ function vwo.displayTabData(numDisplayed, instance, ftable, infoTableData)
   -- Empty state placeholder.
   if numDisplayed == prevDisplayed then
     local emptyRow = tblOrGroup:addRow(MODE, { interactive = false })
-    emptyRow[2]:setColSpan(4 + maxIcons):createText(ReadText(PAGE_ID, 1000))
+    local text = tooMany and string.format(ReadText(PAGE_ID, 1003), tooMany, vwo.maxSectorStations) or ReadText(PAGE_ID, 1000)
+    emptyRow[2]:setColSpan(4 + maxIcons):createText(text, { wordwrap = true })
   end
 
   return { numdisplayed = numDisplayed }
@@ -547,21 +655,27 @@ function vwo.Init(menuMap)
   vwo.setupTab()
 end
 
+--- Read the config from player.entity.$visibleWareOverviewConfig; on init and on VisibleWareOverview.ConfigChanged.
+local function vwoOnConfigChanged()
+  if vwo.playerId == nil then return end
+  local cfg = GetNPCBlackboard(vwo.playerId, "$visibleWareOverviewConfig")
+  if not cfg then return end
+  debugLevel              = cfg.debugMode and tostring(cfg.debugMode) or "none"
+  vwo.dataRefreshInterval = math.max(1, math.min(10, tonumber(cfg.dataRefreshInterval) or 3))
+  vwo.visibleSectors      = (cfg.visibleSectors == true) or (cfg.visibleSectors == 1)
+  vwo.maxSectorStations   = math.floor(math.max(0, math.min(2000, tonumber(cfg.maxSectorStations) or 150)))
+  vwo.dataCache           = nil
+  vwo.sectorCache         = nil
+  debug("config: debug " .. debugLevel .. ", refresh interval " .. tostring(vwo.dataRefreshInterval)
+    .. ", visible sectors " .. tostring(vwo.visibleSectors) .. ", station limit " .. tostring(vwo.maxSectorStations))
+end
+
 local function Init()
   debug("Initialising Visible Ware Overview")
 
-  RegisterEvent("VisibleWareOverview.ConfigChanged", function(_, param)
-    if param == nil then return end
-    if param.debugMode ~= nil then
-      debugLevel = param.debugMode
-      debug("debug mode set to: " .. tostring(debugLevel))
-    end
-    if param.dataRefreshInterval ~= nil then
-      vwo.dataRefreshInterval = math.max(1, math.min(10, tonumber(param.dataRefreshInterval) or 3))
-      vwo.dataCache = nil   -- invalidate so the next render picks up the new interval
-      debug("dataRefreshInterval set to: " .. tostring(vwo.dataRefreshInterval))
-    end
-  end)
+  vwo.playerId = ConvertStringTo64Bit(tostring(C.GetPlayerID()))
+  RegisterEvent("VisibleWareOverview.ConfigChanged", vwoOnConfigChanged)
+  vwoOnConfigChanged()
 
   local menuMap = Helper.getMenu("MapMenu")
   if menuMap == nil or type(menuMap.registerCallback) ~= "function" then

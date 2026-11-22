@@ -6,21 +6,29 @@
       <!-- mod identity -->
       <t id="1">Görünür istasyonlardaki mallar</t>
       <t id="2">Harita görünümünde şu anda görüntülenen istasyonlardaki malları taşıma türüne göre gruplandırarak listeler. NPC istasyonları yalnızca Mantıksal İstasyon Genel Görünümü görünürlük kuralları aracılığıyla mal verileri oyuncuya görünür olduğunda dahil edilir.</t>
+      <t id="3">Görünür sektörler</t>
 
       <!-- status messages -->
       <t id="1000">Bu harita görünümündeki istasyonlar için mal verisi bulunamadı</t>
+      <t id="1003">Görünür sektörlerde %d istasyon var, sınır %d. Listelemek için yakınlaştırın.</t>
+
+      <!-- settings: general options -->
+      <t id="10000">Genel</t>
+      <t id="10020">Görünür sektörlerdeki tüm istasyonları göster</t>
 
       <!-- settings: general section -->
       <t id="20000">Performans</t>
 
       <!-- settings: data refresh interval -->
       <t id="20010">Veri yenileme aralığı</t>
+      <t id="20020">Görünür sektörler: listelenecek en fazla istasyon sayısı \(0 = sınırsız\)</t>
 
       <!-- settings: debug section -->
-      <t id="90000">Hata ayıklama</t>
-      <t id="90010">Hata ayıklama düzeyi</t>
-      <t id="90012">Hata ayıklama</t>
-      <t id="90013">İzleme</t>
+      <t id="90900">Hata Ayıklama</t>
+      <t id="90910">Hata Ayıklama Seviyesi</t>
+      <t id="90911">Yok</t>
+      <t id="90912">Hata Ayıklama</t>
+      <t id="90913">İzleme</t>
     </page>
   </add>
 </diff>
